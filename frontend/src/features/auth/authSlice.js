@@ -107,6 +107,6 @@ export const authSlice = createSlice({
     }
 })
 
-// whenever create an action i wxport is from authSlice.actions
+// whenever create an action i export is from authSlice.actions
 export const { reset } = authSlice.actions
 export default authSlice.reducer

@@ -9,7 +9,7 @@ const ticketSchema = new mongoose.Schema({
     product: {
         type: String,
         required: [true, 'Please select a product'],
-        enum: ['DogFood', 'Treats', 'Toys', 'Ball'],
+        enum: ['Dog Food', 'Treats', 'Toys', 'Ball'],
     },
     description: {
         type: String,
