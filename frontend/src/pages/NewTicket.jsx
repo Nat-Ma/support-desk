@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createTicket, reset } from '../features/ticket/ticketSlice'
+import { createTicket, reset } from '../features/tickets/ticketSlice'
+import { toast } from 'react-toastify'
 
 const NewTicket = () => {
     const [product, setProduct] = useState('Toys')
@@ -24,6 +25,8 @@ const NewTicket = () => {
 
         setProduct('Toys')
         setDescription('')
+
+        toast.success('Ticket was created successfully!')
     }
 
     return (
@@ -36,11 +39,11 @@ const NewTicket = () => {
             <section className="form">
                 <div className="form-group">
                     <label htmlFor='name'>Customer Name</label>
-                    <input type='text' className='form-control' value={user.name} disabled />
+                    <input id="name" type='text' className='form-control' value={user.name} disabled />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='email'>Customer Email</label>
-                    <input type='text' className='form-control' value={user.email} disabled />
+                    <input id="email" type='text' className='form-control' value={user.email} disabled />
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="form-group">

@@ -4,7 +4,8 @@ import ticketService from './ticketService'
 // Get user from localstorage
 
 const initialState = {
-    ticket: null,
+    tickets: [],
+    ticket: {},
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -35,12 +36,7 @@ export const ticketSlice = createSlice({
     name: 'ticket',
     initialState,
     reducers: {
-        reset: (state) => {
-            state.isLoading = false
-            state.isError = false
-            state.isSuccess = false
-            state.message = ''
-        }
+        reset: (state) => initialState
     },
     extraReducers: (builder) => {
         builder
@@ -50,11 +46,12 @@ export const ticketSlice = createSlice({
             .addCase(createTicket.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
+                state.tickets = [...state.tickets, ...action.payload]
                 state.ticket = action.payload
             })
             .addCase(createTicket.rejected, (state, action) => {
                 state.isLoading = false
-                state.ticket = null
+                state.ticket = {}
                 state.isError = true
                 state.message = action.payload
             })
