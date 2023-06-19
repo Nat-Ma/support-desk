@@ -115,7 +115,7 @@ const deleteTicket = asyncHandler(async (req, res) => {
 // @route   PUT /api/tickets/:id
 // @access  Private
 const updateTicket = asyncHandler(async (req, res) => {
-    const { product, description } = req.body
+    const { product, description, status } = req.body
 
     // Get user using the id in the JWT
     const user = await User.findById(req.user.id)
@@ -127,7 +127,7 @@ const updateTicket = asyncHandler(async (req, res) => {
     }
 
     // Find Ticket
-    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, { product, description }, { new: true })
+    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, { product, description, status }, { new: true })
 
     if (updatedTicket.user.toString() !== req.user.id) {
         res.status(401)
