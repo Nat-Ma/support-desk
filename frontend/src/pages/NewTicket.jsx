@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createTicket, reset } from '../features/tickets/ticketSlice'
+import { createTicket } from '../features/tickets/ticketSlice'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -11,7 +11,7 @@ const NewTicket = () => {
     const [description, setDescription] = useState('')
     
     const { user } = useSelector(state => state.auth)
-    const { ticket, isLoading, isError, isSuccess, message } = useSelector(state => state.ticket)
+    const { ticket, isLoading, isError, isSuccess, message } = useSelector(state => state.tickets)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,8 +20,7 @@ const NewTicket = () => {
         if (isError) {
             toast.error(message)
         }
-        if (!ticket) {
-            dispatch(reset())
+        if (isSuccess) {
             navigate('/tickets')
         }
     }, [dispatch, isError, isSuccess, navigate, message, ticket])
@@ -37,9 +36,6 @@ const NewTicket = () => {
         }
 
         dispatch(createTicket(ticketData))
-
-        setProduct('Toys')
-        setDescription('')
     }
 
     if (isLoading) {

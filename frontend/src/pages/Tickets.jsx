@@ -8,7 +8,7 @@ import TicketItem from '../components/TicketItem'
 
 const Tickets = () => {
 
-    const { tickets, isError, isSuccess, message } = useSelector(state => state.ticket)
+    const { tickets, isError, isSuccess, message } = useSelector(state => state.tickets)
     const dispatch = useDispatch()
 
     // return function on unmount to reset, otherwise endless loop
@@ -23,9 +23,9 @@ const Tickets = () => {
     useEffect(() => {
         dispatch(getTickets())
 
-        // if(isError) {
-        //     toast.error(message)
-        // }
+        if(isError) {
+            toast.error(message)
+        }
 
     }, [dispatch, message, isError])
 
